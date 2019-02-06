@@ -35,6 +35,7 @@ public class ServiceActivity implements ActivityInterface {
         em.persist (activities);
 
         tx.commit ();
+
         return activities;
     }
 
