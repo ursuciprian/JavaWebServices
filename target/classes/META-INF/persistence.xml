@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+    <persistence-unit name="ActivityTracker" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.activity.tracker.activities.Activities</class>
+        <class>com.activity.tracker.users.ActivityUsers</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <!--<property name="hibernate.connection.username" value="root"/>
+             <property name="hibernate.connection.password" value="123qwe1!"/>
+             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/activitytracker"/>
+             <property name="hibernate.max_fetch_depth" value="3"/>-->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/activitytracker"/>
+            <property name="javax.persistence.database-product-name" value="MySql"/>
+            <property name="javax.persistence.jdbc.user" value="ciprian" />
+            <property name="javax.persistence.jdbc.password" value="123qwe1!" />
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target" value="create.ddl"/>
+            <property name="javax.persistence.schema-generation.scripts.drop-target" value="drop.ddl"/>
+            <property name="hibernate.logging.level" value="ERROR"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="forTesting" transaction-type="RESOURCE_LOCAL">
+
+
+
+
+    </persistence-unit>
+
+
+</persistence>
