@@ -24,10 +24,19 @@ public class ClubMember {
     @OneToMany(cascade = ALL, mappedBy = "member", fetch = FetchType.EAGER)
     @JoinColumn
     private List<Club> clubs = new ArrayList<> ();
-    clubs.
+
 
     public ClubMember(){}
+    public ClubMember( String firstName, String lastName, Date birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
 
+    }    public ClubMember( String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+    }
     public ClubMember( String firstName, String lastName, Date birthDate, List<Club> clubs) {
         this.firstName = firstName;
         this.lastName = lastName;
