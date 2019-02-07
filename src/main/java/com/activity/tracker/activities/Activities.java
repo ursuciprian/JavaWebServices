@@ -1,14 +1,8 @@
 package com.activity.tracker.activities;
 
-import com.activity.tracker.services.ServiceActivity;
-import com.activity.tracker.ws.ActivityInterface;
-import javafx.util.Duration;
-
-import javax.jws.WebService;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity (name = "ACTIVITIES")

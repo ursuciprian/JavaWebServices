@@ -1,10 +1,8 @@
 package com.activity.tracker.services;
 
 import com.activity.tracker.activities.Activities;
-import com.activity.tracker.ws.ActivityInterface;
+import com.activity.tracker.ws.ActivityTrackerInterface;
 
-import javax.jws.WebMethod;
-import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,8 +10,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 
-@WebService(endpointInterface = "com.activity.tracker.ws.ActivityInterface")
-public class ServiceActivity implements ActivityInterface {
+@WebService(endpointInterface = "com.activity.tracker.ws.ActivityTrackerInterface")
+public class ServiceActivityTracker implements ActivityTrackerInterface {
 
 
 
@@ -38,22 +36,18 @@ public class ServiceActivity implements ActivityInterface {
         tx.commit ();
         return activities;
     }
+    @Override
+    public Activities removeActivity(int activityId) {
 
-public void removeActivity(int id) {
-        try {
-            Activities activities = em.find (Activities.class, id);
+            Activities activities = em.find (Activities.class, activityId);
             if (activities != null) {
 
                 tx.begin ();
                 em.remove (activities);
                 tx.commit ();
             }
-        } catch (Exception e) {
 
-            System.out.println ("ID: " + id + "not found" + e.getMessage ());
-
-        }
-
+        return activities;
     }
 
 }

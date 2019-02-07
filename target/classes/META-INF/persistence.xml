@@ -4,7 +4,9 @@
 
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.activity.tracker.activities.Activities</class>
-        <class>com.activity.tracker.users.ActivityUsers</class>
+        <class>com.activity.tracker.users.ClubMember</class>
+        <class>com.activity.tracker.clubs.Club</class>
+        <class>com.activity.tracker.clubs.City</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
