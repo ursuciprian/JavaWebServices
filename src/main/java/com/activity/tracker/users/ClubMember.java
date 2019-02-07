@@ -2,7 +2,6 @@ package com.activity.tracker.users;
 
 import com.activity.tracker.clubs.Club;
 
-import javax.naming.Name;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,22 +11,24 @@ import java.util.Objects;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name = "club_member")
+@Table(name = "members")
 public class ClubMember {
     @Id
+    @GeneratedValue
     private int memberId;
     private String firstName;
     private String lastName;
     @Temporal (TemporalType.DATE)
     private Date birthDate;
 
-    @OneToMany(cascade = ALL, mappedBy = "member")
+    @OneToMany(cascade = ALL, mappedBy = "member", fetch = FetchType.EAGER)
+    @JoinColumn
     private List<Club> clubs = new ArrayList<> ();
+    clubs.
 
     public ClubMember(){}
 
-    public ClubMember(int memberId, String firstName, String lastName, Date birthDate, List<Club> clubs) {
-        this.memberId = memberId;
+    public ClubMember( String firstName, String lastName, Date birthDate, List<Club> clubs) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;

@@ -15,12 +15,12 @@ public class City {
     @Id
     @GeneratedValue
     private int cityId;
-    private int cityName;
+    private String cityName;
     @OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "city")
     private List<Club> clubs = new ArrayList<> ();
 
     public City(){}
-    public City(int cityId, int cityName, List<Club> clubs) {
+    public City(int cityId, String cityName, List<Club> clubs) {
         this.cityId = cityId;
         this.cityName = cityName;
         this.clubs = clubs;
@@ -34,11 +34,11 @@ public class City {
         this.cityId = cityId;
     }
 
-    public int getCityName() {
+    public String getCityName() {
         return cityName;
     }
 
-    public void setCityName(int cityName) {
+    public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 

@@ -14,10 +14,10 @@ public class Club {
     private String clubCity;
     private enum clubFacilities{};
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private City city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ClubMember member;
 
     public Club() {
@@ -26,8 +26,7 @@ public class Club {
 
 
 
-    public Club(int clubId, String clubName, float clubRanking, String clubCity, ClubMember member){
-        this.clubId = clubId;
+    public Club( String clubName, float clubRanking, String clubCity, ClubMember member){
         this.clubName = clubName;
         this.clubRanking = clubRanking;
         this.clubCity = clubCity;

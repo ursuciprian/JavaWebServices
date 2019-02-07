@@ -1,0 +1,95 @@
+package com.activity.tracker.services;
+
+import com.activity.tracker.activities.Activities;
+import com.activity.tracker.clubs.City;
+import com.activity.tracker.clubs.Club;
+import com.activity.tracker.ws.ActivityTrackerInterface;
+
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+
+@WebService(endpointInterface = "com.activity.tracker.ws.ActivityTrackerInterface")
+public class WSServices implements ActivityTrackerInterface {
+
+
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory ("ActivityTracker");
+    EntityManager em = emf.createEntityManager ();
+    EntityTransaction tx = em.getTransaction ();
+
+    @Override
+    public Activities addActivity(int activityId, String activityName, String difficulty, boolean trainingRequired) {
+
+
+        Activities activities = new Activities ();
+        activities.setActivityId (activityId);
+        activities.setActivityName (activityName);
+        activities.setDifficulty (difficulty);
+        activities.setTrainingRequired (trainingRequired);
+
+        tx.begin ();
+        em.persist (activities);
+        tx.commit ();
+        return activities;
+    }
+
+    @Override
+    public Activities removeActivity(int activityId) {
+
+        Activities activities = retrieveActivity (activityId);
+        if (activities != null) {
+
+            tx.begin ();
+            em.remove (activities);
+            tx.commit ();
+        }
+
+        return activities;
+    }
+
+    @Override
+    public Activities getActivities(int activityId){
+
+        Activities activities = retrieveActivity (activityId);
+        return activities;
+
+    }
+    private Activities retrieveActivity(int activityId) {
+        return em.find (Activities.class, activityId);
+    }
+
+    @Override
+    public City addCity(int cityId, String cityName){
+
+        City cities = new City ();
+        cities.setCityId (cityId);
+        cities.setCityName(cityName);
+
+        tx.begin ();
+        em.persist (cities);
+        tx.commit ();
+
+        return cities;
+    }
+    @Override
+    public Club addClub(String clubName, String cityName, float clubRank){
+
+        Club clubs = new Club ();
+        clubs.setClubName (clubName);
+        clubs.setClubRanking (clubRank);
+        clubs.setClubCity(cityName);
+
+        tx.begin ();
+        em.persist (clubs);
+        tx.commit ();
+
+        return clubs;
+    }
+
+}
+
+
+
