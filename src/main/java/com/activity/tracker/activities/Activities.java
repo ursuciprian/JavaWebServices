@@ -51,8 +51,8 @@ public class Activities{
         return difficulty;
     }
 
-    public void setDificulty(String dificulty) {
-        this.difficulty = dificulty;
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     public boolean isTrainingRequired() {
