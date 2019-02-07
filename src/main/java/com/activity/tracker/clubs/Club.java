@@ -3,37 +3,28 @@ package com.activity.tracker.clubs;
 import com.activity.tracker.users.ClubMember;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Club {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int clubId;
     private String clubName;
     private float clubRanking;
-    private String clubCity;
-    private enum clubFacilities{};
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private City city;
+    //@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    //private City city;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private ClubMember member;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<ClubMember> members;
 
-    public Club() {
-    }
-
-
-
-
-    public Club( String clubName, float clubRanking, String clubCity, ClubMember member){
+    public Club(){}
+    public Club(String clubName, float clubRanking, List<ClubMember> members) {
         this.clubName = clubName;
         this.clubRanking = clubRanking;
-        this.clubCity = clubCity;
-        this.member = member;
+        this.members = members;
     }
-
-
 
     public int getClubId() {
         return clubId;
@@ -59,11 +50,11 @@ public class Club {
         this.clubRanking = clubRanking;
     }
 
-    public String getClubCity() {
-        return clubCity;
+    public List<ClubMember> getMembers() {
+        return members;
     }
 
-    public void setClubCity(String clubCity) {
-        this.clubCity = clubCity;
+    public void setMembers(List<ClubMember> members) {
+        this.members = members;
     }
 }
