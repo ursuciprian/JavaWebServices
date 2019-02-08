@@ -13,10 +13,10 @@ import static javax.persistence.CascadeType.ALL;
 public class City {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cityId;
     private String cityName;
-    @OneToMany(cascade = ALL, orphanRemoval = true, mappedBy = "city")
+    @OneToMany(cascade = ALL, orphanRemoval = true)
     private List<Club> clubs = new ArrayList<> ();
 
     public City(){}

@@ -14,9 +14,6 @@ public class Main {
     public static void main(String[] args) {
         Endpoint.publish ("http://localhost:8086/ActivityTracker", new WSServices ());
 
-        List<Club> cl = new ArrayList<> ();
-        cl.add (new Club ("Vivertine",3.5f,"Iasi", new ClubMember ("Ciprian", "Ursu")));
-
 
     }
 }

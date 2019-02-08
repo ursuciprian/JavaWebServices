@@ -14,30 +14,34 @@ import static javax.persistence.CascadeType.ALL;
 @Table(name = "members")
 public class ClubMember {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memberId;
     private String firstName;
     private String lastName;
-    @Temporal (TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @OneToMany(cascade = ALL, mappedBy = "member", fetch = FetchType.EAGER)
-    @JoinColumn
-    private List<Club> clubs = new ArrayList<> ();
+    @ManyToMany(cascade = ALL, fetch = FetchType.EAGER)
+    private List<Club> clubs = new ArrayList<>();
 
 
-    public ClubMember(){}
-    public ClubMember( String firstName, String lastName, Date birthDate) {
+    public ClubMember() {
+    }
+
+    public ClubMember(String firstName, String lastName, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
 
-    }    public ClubMember( String firstName, String lastName) {
+    }
+
+    public ClubMember(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
 
     }
-    public ClubMember( String firstName, String lastName, Date birthDate, List<Club> clubs) {
+
+    public ClubMember(String firstName, String lastName, Date birthDate, List<Club> clubs) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -98,18 +102,18 @@ public class ClubMember {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass () != o.getClass ()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ClubMember that = (ClubMember) o;
         return memberId == that.memberId &&
-                firstName.equals (that.firstName) &&
-                lastName.equals (that.lastName) &&
-                birthDate.equals (that.birthDate) &&
-                Objects.equals (clubs, that.clubs);
+                firstName.equals(that.firstName) &&
+                lastName.equals(that.lastName) &&
+                birthDate.equals(that.birthDate) &&
+                Objects.equals(clubs, that.clubs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash (memberId, firstName, lastName, birthDate, clubs);
+        return Objects.hash(memberId, firstName, lastName, birthDate, clubs);
     }
 }
 
