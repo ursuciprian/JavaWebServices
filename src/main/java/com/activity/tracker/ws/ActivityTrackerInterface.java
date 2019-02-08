@@ -10,6 +10,8 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.persistence.EntityManager;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 @WebService(name = "ActivityTracker")
@@ -25,7 +27,7 @@ public interface ActivityTrackerInterface {
 
     @WebMethod(operationName = "addClub")
     @WebResult(name = "addedClubs")
-    Club addClub(@WebParam(name = "clubName") String clubName, @WebParam(name = "city") City city, @WebParam(name = "Rating") float clubRank);
+    Club addClub(@WebParam(name = "clubName") String clubName, @WebParam(name = "Rating") float clubRank);
 
     @WebMethod(operationName = "removeActivity")
     @WebResult(name = "removedActivity")
@@ -40,4 +42,7 @@ public interface ActivityTrackerInterface {
     @WebMethod(operationName = "createActiveClub")
     @WebResult(name = "created")
     City createActiveClub(@WebParam(name = "cityName") String cityName, @WebParam(name = "clubName") String clubName, @WebParam(name = "memberName") List<String> memberName);
+
+
+    List<Club> findClubs(String clubName);
 }

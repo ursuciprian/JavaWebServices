@@ -3,7 +3,17 @@ package com.activity.tracker.clubs;
 import com.activity.tracker.users.ClubMember;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
+
+@XmlRootElement
+
+@XmlAccessorType(XmlAccessType.FIELD)
+
+@XmlType(propOrder={"clubId", "clubName", "clubRanking", "members"})
 
 @Entity
 public class Club {
@@ -16,7 +26,7 @@ public class Club {
     //@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     //private City city;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<ClubMember> members;
 
     public Club(){}

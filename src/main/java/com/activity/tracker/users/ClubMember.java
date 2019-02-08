@@ -21,7 +21,7 @@ public class ClubMember {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @ManyToMany(cascade = ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = ALL, fetch = FetchType.LAZY)
     private List<Club> clubs = new ArrayList<>();
 
 

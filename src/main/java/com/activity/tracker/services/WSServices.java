@@ -7,10 +7,7 @@ import com.activity.tracker.users.ClubMember;
 import com.activity.tracker.ws.ActivityTrackerInterface;
 
 import javax.jws.WebService;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +20,7 @@ public class WSServices implements ActivityTrackerInterface {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("ActivityTracker");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
+    TypedQuery<Club> query = em.createQuery ("select c from Club c where c.clubName = ?1", Club.class);
 
     @Override
     public Activities addActivity(int activityId, String activityName, String difficulty, boolean trainingRequired) {
@@ -81,13 +79,11 @@ public class WSServices implements ActivityTrackerInterface {
     }
 
     @Override
-    public Club addClub(String clubName, City city, float clubRank) {
+    public Club addClub(String clubName, float clubRank) {
 
         Club clubs = new Club();
         clubs.setClubName(clubName);
         clubs.setClubRanking(clubRank);
-        List<City> cities = new ArrayList<>();
-        cities.add(city);
         tx.begin();
         em.persist(clubs);
         tx.commit();
@@ -111,9 +107,7 @@ public class WSServices implements ActivityTrackerInterface {
             clubMember.setLastName(memberName);
             clubMember.setBirthDate(new Date());
             clubMembers.add(clubMember);
-
         }
-
         club.setMembers(clubMembers);
         clubs.add(club);
 
@@ -125,7 +119,13 @@ public class WSServices implements ActivityTrackerInterface {
         return city;
     }
 
+    @Override
+    public List<Club> findClubs(String clubName){
+
+        List<Club> clubList = query.setParameter (1,clubName).getResultList ();
+
+        return (List<Club>) clubList;
+    }
+
 }
-
-
 

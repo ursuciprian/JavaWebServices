@@ -1,12 +1,22 @@
 package com.activity.tracker.clubs;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.CascadeType.ALL;
+
+@XmlRootElement
+
+@XmlAccessorType(XmlAccessType.FIELD)
+
+@XmlType(propOrder={"cityId", "cityName", "clubs"})
 
 @Entity
 @Table(name = "cities")
